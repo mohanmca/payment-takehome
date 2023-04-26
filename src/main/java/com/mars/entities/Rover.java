@@ -1,9 +1,8 @@
 package com.mars.entities;
 
-import java.util.Arrays;
+import com.mars.tools.CommandParser;
+
 import java.util.Map;
-import java.util.Optional;
-import java.util.function.Predicate;
 
 public class Rover {
 
@@ -32,23 +31,17 @@ public class Rover {
             'F',
             this::moveForward,
             'R',
-            this::rotate,
+            this::rotateRight,
             'L',
             this::rotateLeft);
   }
 
   public void move(String instructions) {
     Character[] commands =
-        Arrays.stream(instructions.toUpperCase().split(","))
-            .map(s -> s.charAt(0))
-            .toArray(Character[]::new);
-
-    Optional<Character> invalidCommands =
-        Arrays.stream(commands).filter(Predicate.not(validCommands.keySet()::contains)).findAny();
-    if (invalidCommands.isPresent()) throw new IllegalArgumentException("Commands are not valid");
+        CommandParser.INSTANCE.parseCommands(instructions, validCommands.keySet());
 
     // TODO: Do we need to optimize if two opposite commands comes together?
-    // At-least one-case where we should not optimize if we need to deliberately burn fuel
+    // **We might need to deliberately burn fuel/when side-effect is required**
 
     for (Character command : commands) {
       Runnable action = validCommands.get(command);
@@ -70,7 +63,7 @@ public class Rover {
     x += (direction == Direction.EAST) ? -1 : 0;
   }
 
-  public void rotate() {
+  public void rotateRight() {
     direction = direction.rotate();
   }
 

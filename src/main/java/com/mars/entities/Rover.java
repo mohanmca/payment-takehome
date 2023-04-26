@@ -37,10 +37,11 @@ public class Rover {
             this::rotateLeft);
   }
 
-  public void move(String command) {
-    command = command.toUpperCase();
+  public void move(String instructions) {
     Character[] commands =
-        Arrays.stream(command.split(",")).map(s -> s.charAt(0)).toArray(Character[]::new);
+        Arrays.stream(instructions.toUpperCase().split(","))
+            .map(s -> s.charAt(0))
+            .toArray(Character[]::new);
 
     Optional<Character> invalidCommands =
         Arrays.stream(commands).filter(Predicate.not(validCommands.keySet()::contains)).findAny();
@@ -49,7 +50,10 @@ public class Rover {
     // TODO: Do we need to optimize if two opposite commands comes together?
     // At-least one-case where we should not optimize if we need to deliberately burn fuel
 
-    Arrays.stream(commands).map(validCommands::get).forEach(Runnable::run);
+    for (Character command : commands) {
+      Runnable action = validCommands.get(command);
+      action.run();
+    }
   }
 
   public void moveForward() {
@@ -74,15 +78,20 @@ public class Rover {
     direction = direction.rotateAntiClockwise();
   }
 
+  public Direction getDirection() {
+    return direction;
+  }
+
+  public int getX() {
+    return x;
+  }
+
+  public int getY() {
+    return y;
+  }
+
   @Override
   public String toString() {
-    return "Rover{"
-        + ", direction="
-        + direction
-        + ", x="
-        + x
-        + ", y="
-        + y
-        + '}';
+    return "Rover{" + ", direction=" + direction + ", x=" + x + ", y=" + y + '}';
   }
 }

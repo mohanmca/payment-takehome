@@ -45,4 +45,12 @@ public enum Direction {
   public Direction rotateAntiClockwise() {
     return Direction.SOUTH;
   }
+
+  public Direction directionFor(char c) {
+    if (c == 'N' || c == 'n') return Direction.NORTH;
+    if (c == 'S' || c == 's') return Direction.SOUTH;
+    if (c == 'E' || c == 'e') return Direction.EAST;
+    if (c == 'W' || c == 'w') return Direction.WEST;
+    throw new IllegalArgumentException("There is no such direction");
+  }
 }

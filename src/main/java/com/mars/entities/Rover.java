@@ -1,6 +1,14 @@
 package com.mars.entities;
 
+import java.util.Arrays;
+import java.util.Map;
+import java.util.Optional;
+import java.util.function.Predicate;
+
 public class Rover {
+
+  private Map<Character, Runnable> validCommands;
+
   private Direction direction;
   private int x;
   private int y;
@@ -13,6 +21,35 @@ public class Rover {
     this.direction = direction;
     this.x = x;
     this.y = y;
+    initialize();
+  }
+
+  private void initialize() {
+    validCommands =
+        Map.of(
+            'B',
+            this::moveBackward,
+            'F',
+            this::moveForward,
+            'R',
+            this::rotate,
+            'L',
+            this::rotateLeft);
+  }
+
+  public void move(String command) {
+    command = command.toUpperCase();
+    Character[] commands =
+        Arrays.stream(command.split(",")).map(s -> s.charAt(0)).toArray(Character[]::new);
+
+    Optional<Character> invalidCommands =
+        Arrays.stream(commands).filter(Predicate.not(validCommands.keySet()::contains)).findAny();
+    if (invalidCommands.isPresent()) throw new IllegalArgumentException("Commands are not valid");
+
+    // TODO: Do we need to optimize if two opposite commands comes together?
+    // At-least one-case where we should not optimize if we need to deliberately burn fuel
+
+    Arrays.stream(commands).map(validCommands::get).forEach(Runnable::run);
   }
 
   public void moveForward() {
@@ -35,5 +72,17 @@ public class Rover {
 
   public void rotateLeft() {
     direction = direction.rotateAntiClockwise();
+  }
+
+  @Override
+  public String toString() {
+    return "Rover{"
+        + ", direction="
+        + direction
+        + ", x="
+        + x
+        + ", y="
+        + y
+        + '}';
   }
 }

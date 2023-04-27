@@ -24,11 +24,22 @@ public class RandomRoverFactory implements RoverFactory {
   }
 
   public Rover createRover() {
+    return createNRovers(1).get(0);
+  }
+
+  public List<Rover> createNRovers(int n) {
+    if (n > 1000) throw new IllegalArgumentException();
     RandomValuePicker r = RandomValuePicker.INSTANCE;
-    List<Integer> points = new ArrayList<>(r.generate(2, -100, 1000));
-    Direction d = r.randomEnum(Direction.class);
-    Rover rover = createRover(d.name().charAt(0), points.remove(0), points.remove(0));
-    return rover;
+    List<Integer> points = new ArrayList<>(r.generate(n * 2, n * n * -2, n * n * 2));
+
+    List<Rover> results = new ArrayList<>();
+    for (int i = 0; i < n; i++) {
+      Direction d = r.randomEnum(Direction.class);
+      Rover rover = createRover(d.name().charAt(0), points.remove(0), points.remove(0));
+      results.add(rover);
+    }
+
+    return results;
   }
 
   @Override

@@ -31,7 +31,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <mainClass>com.jpm.service.Main</mainClass>
+                            <mainClass>com.mars.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

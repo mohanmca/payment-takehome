@@ -3,6 +3,8 @@ package com.mars.service;
 import com.mars.entities.Direction;
 import com.mars.entities.Rover;
 
+import java.util.List;
+
 /** This is singleton, we can encode singleton as per EJ-3. */
 public class RoverFactoryImpl implements RoverFactory {
 
@@ -37,6 +39,11 @@ public class RoverFactoryImpl implements RoverFactory {
   public Rover createRover(char c, int x, int y) {
     Direction d = Direction.EAST.directionFor(c);
     return new Rover(d, x, y);
+  }
+
+  @Override
+  public List<Rover> createNRovers(int n) {
+    throw new UnsupportedOperationException();
   }
 
   private boolean isValidCoordinate(String[] coordinates) {

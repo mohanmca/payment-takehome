@@ -1,5 +1,6 @@
 package com.mars.web.controller;
 
+import com.mars.service.RandomRoverFactory;
 import com.mars.service.RoverFactory;
 import com.mars.service.RoverFactoryImpl;
 import org.springframework.context.annotation.Bean;
@@ -8,6 +9,6 @@ import org.springframework.context.annotation.Bean;
 public class Configuration {
   @Bean
   public RoverFactory getFactory() {
-    return RoverFactoryImpl.getInstance();
+    return RandomRoverFactory.getInstance();
   }
 }

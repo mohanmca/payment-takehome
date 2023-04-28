@@ -18,6 +18,6 @@ class WebApplicationTest {
   @Test
   public void testSample() throws Exception {
     ResponseEntity<String> response = template.getForEntity("/", String.class);
-    assertThat(response.getBody()).contains("status");
+    assertThat(response.getBody()).contains("Mars planet");
   }
 }

@@ -21,7 +21,7 @@ public class RoverController {
   @GetMapping("/rover/create")
   Rover newRover(Character direction, Integer x, Integer y) {
     Integer id = registry.size();
-    registry.put(registry.size(), factory.createRover());
+    registry.put(registry.size(), factory.createRover(direction, x, y));
     return registry.get(id);
   }
 

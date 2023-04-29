@@ -4,26 +4,30 @@ import com.mars.tools.CommandParser;
 
 import java.util.Map;
 
-public class Rover {
+public class Rover implements Identifiable {
 
+  private final Long id;
   private Map<Character, Runnable> validCommands;
-
   private Direction direction;
-  private int x;
-  private int y;
+  private Coordinate coordinate;
 
   public Rover() {
-    this(Direction.NORTH, 0, 0);
+    this(Direction.NORTH, Coordinate.ORIGIN);
   }
 
-  public Rover(Direction direction, int x, int y) {
+  public Rover(Direction direction, Coordinate coordinate) {
     this.direction = direction;
-    this.x = x;
-    this.y = y;
+    this.coordinate = coordinate;
+    id = System.nanoTime();
     initialize();
   }
 
+  public Rover(Rover clone) {
+    this(clone.direction, clone.getCoordinate());
+  }
+
   private void initialize() {
+
     validCommands =
         Map.of(
             'B',
@@ -37,6 +41,7 @@ public class Rover {
   }
 
   public void move(String instructions) {
+    if (instructions.isEmpty()) return;
     Character[] commands =
         CommandParser.INSTANCE.parseCommands(instructions, validCommands.keySet());
 
@@ -49,18 +54,28 @@ public class Rover {
     }
   }
 
+  public Rover project(String instructions) {
+    Rover r = new Rover(this);
+    r.move(instructions);
+    return r;
+  }
+
   public void moveForward() {
-    y += (direction == Direction.NORTH) ? 1 : 0;
-    y += (direction == Direction.SOUTH) ? -1 : 0;
-    x += (direction == Direction.EAST) ? 1 : 0;
-    x += (direction == Direction.WEST) ? -1 : 0;
+    int dx = 0, dy = 0;
+    dy += (direction == Direction.NORTH) ? 1 : 0;
+    dy += (direction == Direction.SOUTH) ? -1 : 0;
+    dx += (direction == Direction.EAST) ? 1 : 0;
+    dx += (direction == Direction.WEST) ? -1 : 0;
+    this.coordinate = this.coordinate.add(dx, dy);
   }
 
   public void moveBackward() {
-    y += (direction == Direction.SOUTH) ? 1 : 0;
-    y += (direction == Direction.NORTH) ? -1 : 0;
-    x += (direction == Direction.WEST) ? 1 : 0;
-    x += (direction == Direction.EAST) ? -1 : 0;
+    int dx = 0, dy = 0;
+    dy += (direction == Direction.SOUTH) ? 1 : 0;
+    dy += (direction == Direction.NORTH) ? -1 : 0;
+    dx += (direction == Direction.WEST) ? 1 : 0;
+    dx += (direction == Direction.EAST) ? -1 : 0;
+    this.coordinate = this.coordinate.add(dx, dy);
   }
 
   public void rotateRight() {
@@ -75,16 +90,17 @@ public class Rover {
     return direction;
   }
 
-  public int getX() {
-    return x;
-  }
-
-  public int getY() {
-    return y;
+  public Coordinate getCoordinate() {
+    return this.coordinate;
   }
 
   @Override
   public String toString() {
-    return "Rover{direction=" + direction + ", x=" + x + ", y=" + y + '}';
+    return "Rover{direction=" + direction + ", Coordinate=" + coordinate.toString() + '}';
+  }
+
+  @Override
+  public Long id() {
+    return id;
   }
 }

@@ -1,5 +1,6 @@
 package com.mars.web.controller;
 
+import com.mars.entities.Plain;
 import com.mars.entities.Rover;
 import com.mars.service.RoverFactory;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,10 +13,12 @@ import java.util.TreeMap;
 @RestController
 public class RoverController {
   private final RoverFactory factory;
+  private final Plain plain;
   Map<Integer, Rover> registry = new TreeMap<Integer, Rover>();
 
-  public RoverController(RoverFactory factory) {
+  public RoverController(RoverFactory factory, Plain plain) {
     this.factory = factory;
+    this.plain = plain;
   }
 
   @GetMapping("/rover/create")
@@ -34,7 +37,7 @@ public class RoverController {
 
   @GetMapping("/rover/createN")
   List<Rover> createNRovers(int n) {
-    List<Rover> rovers = factory.createNRovers(n);
+    List<Rover> rovers = factory.createNRovers(n, plain);
     for (Rover r : rovers) {
       Integer id = registry.size();
       registry.put(registry.size(), r);

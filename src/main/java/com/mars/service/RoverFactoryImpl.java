@@ -1,6 +1,8 @@
 package com.mars.service;
 
+import com.mars.entities.Coordinate;
 import com.mars.entities.Direction;
+import com.mars.entities.Plain;
 import com.mars.entities.Rover;
 
 import java.util.List;
@@ -19,7 +21,7 @@ public class RoverFactoryImpl implements RoverFactory {
   }
 
   @Override
-  public Rover createRover() {
+  public Rover createRover(Plain plain) {
     throw new UnsupportedOperationException("This factory won't create random rovers!");
   }
 
@@ -38,11 +40,12 @@ public class RoverFactoryImpl implements RoverFactory {
   @Override
   public Rover createRover(char c, int x, int y) {
     Direction d = Direction.EAST.directionFor(c);
-    return new Rover(d, x, y);
+    Coordinate coord = new Coordinate(x, y);
+    return new Rover(d, coord);
   }
 
   @Override
-  public List<Rover> createNRovers(int n) {
+  public List<Rover> createNRovers(int n, Plain p) {
     throw new UnsupportedOperationException();
   }
 

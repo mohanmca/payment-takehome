@@ -2,12 +2,12 @@ package com.mars.entities;
 
 import java.util.TreeMap;
 
-public class Plain {
+public class Plane {
 
   private final Coordinate topLeft, bottomRight;
   TreeMap<Coordinate, Coordinate> objects = new TreeMap<>();
 
-  public Plain(Coordinate topLeft, Coordinate bottomRight) {
+  public Plane(Coordinate topLeft, Coordinate bottomRight) {
     this.topLeft = topLeft;
     this.bottomRight = bottomRight;
   }

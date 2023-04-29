@@ -1,7 +1,7 @@
 package com.mars.service;
 
 import com.mars.entities.Direction;
-import com.mars.entities.Plain;
+import com.mars.entities.Plane;
 import com.mars.entities.Rover;
 import com.mars.tools.RandomValuePicker;
 
@@ -24,15 +24,15 @@ public class RandomRoverFactory implements RoverFactory {
     return INSTANCE;
   }
 
-  public Rover createRover(Plain plain) {
-    return createNRovers(1, plain).get(0);
+  public Rover createRover(Plane plane) {
+    return createNRovers(1, plane).get(0);
   }
 
-  public List<Rover> createNRovers(int n, Plain plain) {
+  public List<Rover> createNRovers(int n, Plane plane) {
     if (n > 1000) throw new IllegalArgumentException();
     RandomValuePicker r = RandomValuePicker.INSTANCE;
     List<Integer> points =
-        new ArrayList<>(r.generate(n * 2, plain.getTopLeft().x(), plain.getBottomRight().x()));
+        new ArrayList<>(r.generate(n * 2, plane.getTopLeft().x(), plane.getBottomRight().x()));
 
     List<Rover> results = new ArrayList<>();
     for (int i = 0; i < n; i++) {

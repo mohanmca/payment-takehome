@@ -1,7 +1,7 @@
 package com.mars.web.controller;
 
 import com.mars.constants.DefaultDummyConfigurations;
-import com.mars.entities.Plain;
+import com.mars.entities.Plane;
 import com.mars.service.RandomRoverFactory;
 import com.mars.service.RoverFactory;
 import org.springframework.context.annotation.Bean;
@@ -14,7 +14,7 @@ public class Configuration {
   }
 
   @Bean
-  public Plain getPlain() {
-    return DefaultDummyConfigurations.DEFAULT_PLAIN;
+  public Plane getPlain() {
+    return DefaultDummyConfigurations.DEFAULT_PLANE;
   }
 }

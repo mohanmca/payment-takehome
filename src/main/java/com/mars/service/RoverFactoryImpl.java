@@ -2,7 +2,7 @@ package com.mars.service;
 
 import com.mars.entities.Coordinate;
 import com.mars.entities.Direction;
-import com.mars.entities.Plain;
+import com.mars.entities.Plane;
 import com.mars.entities.Rover;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class RoverFactoryImpl implements RoverFactory {
   }
 
   @Override
-  public Rover createRover(Plain plain) {
+  public Rover createRover(Plane plane) {
     throw new UnsupportedOperationException("This factory won't create random rovers!");
   }
 
@@ -45,7 +45,7 @@ public class RoverFactoryImpl implements RoverFactory {
   }
 
   @Override
-  public List<Rover> createNRovers(int n, Plain p) {
+  public List<Rover> createNRovers(int n, Plane p) {
     throw new UnsupportedOperationException();
   }
 

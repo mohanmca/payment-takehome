@@ -11,22 +11,22 @@ public class TrafficController {
 
   final int numberOfRovers;
   final RoverFactory factory;
-  final Plain plain;
+  final Plane plane;
   final Map<Integer, Rover> roverMap = new TreeMap<>();
 
-  public TrafficController(int numberOfRovers, RoverFactory factory, Plain plain) {
-    this.plain = plain;
+  public TrafficController(int numberOfRovers, RoverFactory factory, Plane plane) {
+    this.plane = plane;
     this.numberOfRovers = numberOfRovers;
     this.factory = factory;
     init();
   }
 
   private void init() {
-    List<Rover> rovers = factory.createNRovers(numberOfRovers, plain);
+    List<Rover> rovers = factory.createNRovers(numberOfRovers, plane);
     for (int i = 0; i < rovers.size(); i++) {
       roverMap.put(i, rovers.get(i));
     }
-    for (Rover r : rovers) plain.register(r.getCoordinate());
+    for (Rover r : rovers) plane.register(r.getCoordinate());
   }
 
   public Rover move(int id, String instructions) {
@@ -37,7 +37,7 @@ public class TrafficController {
     StringBuilder sb = new StringBuilder();
     for (Character c : commands) {
       r = r.project(c + "");
-      if (plain.isOccupied(r.getCoordinate())) {
+      if (plane.isOccupied(r.getCoordinate())) {
         System.err.println("***Collision detected! -" + r.id());
         break;
       } else {
@@ -47,7 +47,7 @@ public class TrafficController {
     Coordinate from = rover.getCoordinate();
     rover.move(sb.toString());
     Coordinate to = rover.getCoordinate();
-    plain.migrate(from, to);
+    plane.migrate(from, to);
     return rover;
   }
 }

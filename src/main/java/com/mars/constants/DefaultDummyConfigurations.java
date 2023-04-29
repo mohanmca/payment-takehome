@@ -1,7 +1,7 @@
 package com.mars.constants;
 
 import com.mars.entities.Coordinate;
-import com.mars.entities.Plain;
+import com.mars.entities.Plane;
 
 /**
  * If any class refers this, that should be only for testing If they are still being used, it is for
@@ -15,5 +15,5 @@ public interface DefaultDummyConfigurations {
 
   Coordinate BOTTOM_RIGHT = new Coordinate(MAXX , MINY);
   Coordinate TOP_LEFT = new Coordinate(MINX , MAXY);
-  Plain DEFAULT_PLAIN = new Plain(TOP_LEFT, BOTTOM_RIGHT);
+  Plane DEFAULT_PLANE = new Plane(TOP_LEFT, BOTTOM_RIGHT);
 }

@@ -6,41 +6,43 @@ import java.util.TreeMap;
 
 public class Plane {
 
-  private final Coordinate topLeft, bottomRight;
-  TreeMap<Coordinate, Coordinate> objects = new TreeMap<>();
+    private final Coordinate topLeft, bottomRight;
+    TreeMap<Coordinate, Coordinate> objects = new TreeMap<>();
 
-  public Plane(Coordinate topLeft, Coordinate bottomRight) {
-    this.topLeft = topLeft;
-    this.bottomRight = bottomRight;
-  }
-
-  public void register(Coordinate coordinate) {
-    if (isInside(coordinate) && !isOccupied(coordinate)) {
-      objects.put(coordinate, coordinate);
+    public Plane(Coordinate topLeft, Coordinate bottomRight) {
+        this.topLeft = topLeft;
+        this.bottomRight = bottomRight;
     }
-  }
 
-  public boolean isOccupied(Coordinate coordinate) {
-    if (coordinate.x() > this.bottomRight.x() || coordinate.x() < this.topLeft.x()) return true;
-    if (coordinate.y() < this.bottomRight.y() || coordinate.y() > this.topLeft.y()) return true;
-    return objects.containsKey(coordinate);
-  }
+    public boolean register(Coordinate coordinate) {
+        if (isInside(coordinate) && !isOccupied(coordinate)) {
+            objects.put(coordinate, coordinate);
+            return true;
+        }
+        return false;
+    }
 
-  public void migrate(Coordinate from, Coordinate to) {
-    objects.remove(from);
-    objects.put(to, to);
-  }
+    public boolean isOccupied(Coordinate coordinate) {
+        if (coordinate.x() > this.bottomRight.x() || coordinate.x() < this.topLeft.x()) return true;
+        if (coordinate.y() < this.bottomRight.y() || coordinate.y() > this.topLeft.y()) return true;
+        return objects.containsKey(coordinate);
+    }
 
-  private boolean isInside(Coordinate coordinate) {
-    if (coordinate.x() < topLeft.x() || coordinate.x() > bottomRight.x()) return false;
-    return (coordinate.y() <= topLeft.y() || coordinate.y() >= bottomRight.y());
-  }
+    public void migrate(Coordinate from, Coordinate to) {
+        objects.remove(from);
+        objects.put(to, to);
+    }
 
-  public Coordinate getTopLeft() {
-    return topLeft;
-  }
+    private boolean isInside(Coordinate coordinate) {
+        if (coordinate.x() < topLeft.x() || coordinate.x() > bottomRight.x()) return false;
+        return (coordinate.y() <= topLeft.y() || coordinate.y() >= bottomRight.y());
+    }
 
-  public Coordinate getBottomRight() {
-    return bottomRight;
-  }
+    public Coordinate getTopLeft() {
+        return topLeft;
+    }
+
+    public Coordinate getBottomRight() {
+        return bottomRight;
+    }
 }

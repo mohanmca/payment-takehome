@@ -8,6 +8,9 @@ import com.mars.tools.CommandParser;
 
 import java.util.Map;
 
+/**
+ * Uses decorator pattern and handles instruction parsing
+ */
 public class NavigableRover implements Rover, Identifiable {
   private final Rover rover;
   private final Long id;
@@ -49,7 +52,7 @@ public class NavigableRover implements Rover, Identifiable {
   }
 
   @Override
-  public NavigableRover project(String instructions) {
+  public NavigableRover forecast(String instructions) {
     NavigableRover r = new NavigableRover(this);
     r.move(instructions);
     return r;

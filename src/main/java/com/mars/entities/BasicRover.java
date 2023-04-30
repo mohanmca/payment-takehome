@@ -26,7 +26,7 @@ public class BasicRover implements Movable, Identifiable, Rover {
   }
 
   @Override
-  public BasicRover project(String instructions) {
+  public BasicRover forecast(String instructions) {
     BasicRover r = new BasicRover(this);
     r.move(instructions);
     return r;

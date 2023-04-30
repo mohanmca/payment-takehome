@@ -1,5 +1,7 @@
 package com.mars.entities;
 
+import com.mars.primitives.Coordinate;
+
 import java.util.TreeMap;
 
 public class Plane {

@@ -1,7 +1,7 @@
 package com.mars.web.controller;
 
 import com.mars.entities.Plane;
-import com.mars.entities.Rover;
+import com.mars.primitives.Rover;
 import com.mars.service.RoverFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;

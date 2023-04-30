@@ -1,4 +1,4 @@
-package com.mars.entities;
+package com.mars.primitives;
 
 public enum Direction {
   NORTH() {

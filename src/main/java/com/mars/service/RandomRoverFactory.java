@@ -1,8 +1,8 @@
 package com.mars.service;
 
-import com.mars.entities.Direction;
+import com.mars.primitives.Direction;
 import com.mars.entities.Plane;
-import com.mars.entities.Rover;
+import com.mars.primitives.Rover;
 import com.mars.tools.RandomValuePicker;
 
 import java.util.ArrayList;
@@ -11,7 +11,7 @@ import java.util.List;
 public class RandomRoverFactory implements RoverFactory {
 
   private static final RandomRoverFactory INSTANCE =
-      new RandomRoverFactory(RoverFactoryImpl.getInstance());
+      new RandomRoverFactory(NavigableRoverFactory.getInstance());
 
   private final RoverFactory factory;
 

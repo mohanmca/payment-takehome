@@ -1,7 +1,7 @@
 package com.mars.service;
 
 import com.mars.entities.Plane;
-import com.mars.entities.Rover;
+import com.mars.primitives.Rover;
 
 import java.util.List;
 

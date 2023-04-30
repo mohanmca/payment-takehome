@@ -1,7 +1,7 @@
-package com.mars.entities;
+package com.mars.primitives;
 
 public record Coordinate(int x, int y)  implements Comparable<Coordinate> {
-    public static final  Coordinate ORIGIN = new Coordinate(0,0);
+
     public Coordinate add(int deltaX, int deltaY) {
         return new Coordinate(this.x+deltaX, this.y+deltaY);
     }

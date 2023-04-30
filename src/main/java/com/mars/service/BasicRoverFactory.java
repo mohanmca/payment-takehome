@@ -1,18 +1,18 @@
 package com.mars.service;
 
-import com.mars.entities.Coordinate;
-import com.mars.entities.Direction;
-import com.mars.entities.Plane;
-import com.mars.entities.Rover;
+import com.mars.entities.*;
+import com.mars.primitives.Coordinate;
+import com.mars.primitives.Direction;
+import com.mars.primitives.Rover;
 
 import java.util.List;
 
 /** This is singleton, we can encode singleton as per EJ-3. */
-public class RoverFactoryImpl implements RoverFactory {
+public class BasicRoverFactory implements RoverFactory {
 
-  private static final RoverFactory INSTANCE = new RoverFactoryImpl();
+  private static final RoverFactory INSTANCE = new BasicRoverFactory();
 
-  private RoverFactoryImpl() {
+  private BasicRoverFactory() {
     super();
   }
 
@@ -41,7 +41,7 @@ public class RoverFactoryImpl implements RoverFactory {
   public Rover createRover(char c, int x, int y) {
     Direction d = Direction.EAST.directionFor(c);
     Coordinate coord = new Coordinate(x, y);
-    return new Rover(d, coord);
+    return new BasicRover(d, coord);
   }
 
   @Override

@@ -8,8 +8,8 @@ import com.mars.entities.Plane;
  * This is for shortcut, testing and with assumptions only
  **/
 public interface DefaultDummyConfigurations {
-  int MINX = -100;
-  int MAXX = 100;
+  int MINX = -10;
+  int MAXX = 10;
   int MINY = MINX;
   Coordinate BOTTOM_RIGHT = new Coordinate(MAXX, MINY);
   int MAXY = MAXX;

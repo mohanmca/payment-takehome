@@ -9,7 +9,7 @@ public class MultipleRoversOnPlane {
 
     RoverManager roverManager =
         new RoverManager(
-            50, RandomRoverFactory.getInstance(), DefaultDummyConfigurations.DEFAULT_PLANE);
+            10, RandomRoverFactory.getInstance(), DefaultDummyConfigurations.DEFAULT_PLANE);
     for (int i = 0; i < 1000; i++) {
       System.out.println(roverManager.move(i % 5, "F,R"));
     }

@@ -67,7 +67,7 @@ public class RoverManager {
         for (int i = 0; i < commands.length; i++) {
             dummyRover = dummyRover.forecast(commands[i] + "");
             if (plane.isOccupied(dummyRover.getCoordinate(), dummyRover)) {
-                System.out.printf("***Collision detected*** - { 'RoverId' :  %d, 'Instruction#':  %d } ", dummyRover.id(), i);
+                System.out.printf("***Collision detected*** - { 'RoverId' :  %d, 'Instruction#':  %d, 'object': %s  } ", dummyRover.id(), i, plane.get(dummyRover.getCoordinate()));
                 break;
             } else {
                 sb.append(commands[i]);

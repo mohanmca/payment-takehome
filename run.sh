@@ -1,5 +1,4 @@
 #!/usr/bin/env bash
-
 docker image rm -f jpm/rover
 docker build -t jpm/rover .
 minikube start

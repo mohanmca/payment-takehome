@@ -1,6 +1,9 @@
 package com.mars.primitives;
 
 public interface Rover {
+
+  Rover clone();
+
   void move(String instructions);
 
   Rover forecast(String instructions);

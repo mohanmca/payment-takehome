@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class RoverFactoryTest {
+class BasicRoverFactoryTest {
   RoverFactory factory = BasicRoverFactory.getInstance();
 
   @Test

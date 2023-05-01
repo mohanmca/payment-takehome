@@ -7,25 +7,29 @@ import java.util.TreeMap;
 public class Plane {
 
     private final Coordinate topLeft, bottomRight;
-    TreeMap<Coordinate, Coordinate> objects = new TreeMap<>();
+    TreeMap<Coordinate, Object> objects = new TreeMap<>();
 
     public Plane(Coordinate topLeft, Coordinate bottomRight) {
         this.topLeft = topLeft;
         this.bottomRight = bottomRight;
     }
 
-    public boolean register(Coordinate coordinate) {
-        if (isInside(coordinate) && !isOccupied(coordinate)) {
-            objects.put(coordinate, coordinate);
+    public boolean register(Coordinate coordinate, Object object) {
+        if (isInside(coordinate) && !isOccupied(coordinate, object)) {
+            objects.put(coordinate, object);
             return true;
         }
         return false;
     }
 
-    public boolean isOccupied(Coordinate coordinate) {
-        if (coordinate.x() > this.bottomRight.x() || coordinate.x() < this.topLeft.x()) return true;
-        if (coordinate.y() < this.bottomRight.y() || coordinate.y() > this.topLeft.y()) return true;
-        return objects.containsKey(coordinate);
+    public boolean isAvailable(Coordinate coordinate) {
+        return !objects.containsKey(coordinate);
+    }
+
+    public boolean isOccupied(Coordinate coordinate, Object object) {
+        if (isOutside(coordinate)) return true;
+        if (isAvailable(coordinate)) return false;
+        return objects.containsKey(coordinate) && !objects.get(coordinate).equals(object);
     }
 
     public void migrate(Coordinate from, Coordinate to) {
@@ -34,8 +38,12 @@ public class Plane {
     }
 
     private boolean isInside(Coordinate coordinate) {
+        return !isOutside(coordinate);
+    }
+
+    private boolean isOutside(Coordinate coordinate) {
         if (coordinate.x() < topLeft.x() || coordinate.x() > bottomRight.x()) return false;
-        return (coordinate.y() <= topLeft.y() || coordinate.y() >= bottomRight.y());
+        return (coordinate.y() > topLeft.y() || coordinate.y() < bottomRight.y());
     }
 
     public Coordinate getTopLeft() {

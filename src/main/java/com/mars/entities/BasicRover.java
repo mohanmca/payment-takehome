@@ -4,71 +4,76 @@ import com.mars.primitives.*;
 
 public class BasicRover implements Movable, Identifiable, Rover {
 
-  private static final int FORWARD = 1;
-  private static final int REVERSE = -1;
-  private final Long id;
-  private Coordinate coordinate;
-  private Direction direction;
+    private static final int FORWARD = 1;
+    private static final int REVERSE = -1;
+    private final Long id;
+    private Coordinate coordinate;
+    private Direction direction;
 
-  public BasicRover(Direction direction, Coordinate coordinate) {
-    this.direction = direction;
-    this.coordinate = coordinate;
-    id = System.nanoTime();
-  }
+    public BasicRover(Direction direction, Coordinate coordinate) {
+        this.direction = direction;
+        this.coordinate = coordinate;
+        id = System.nanoTime();
+    }
 
-  public BasicRover(BasicRover clone) {
-    this(clone.direction, clone.getCoordinate());
-  }
+    public BasicRover(BasicRover clone) {
+        this(clone.direction, clone.getCoordinate());
+    }
 
-  @Override
-  public void move(String instructions) {
-    throw new UnsupportedOperationException("This rover won't support!");
-  }
+    @Override
+    public Rover clone() {
+        return new BasicRover(this.direction, this.coordinate);
+    }
 
-  @Override
-  public BasicRover forecast(String instructions) {
-    BasicRover r = new BasicRover(this);
-    r.move(instructions);
-    return r;
-  }
+    @Override
+    public void move(String instructions) {
+        throw new UnsupportedOperationException("This rover won't support!");
+    }
 
-  @Override
-  public void moveForward() {
-    Coordinate delta = move(FORWARD, this.direction);
-    this.coordinate = this.coordinate.add(delta.x(), delta.y());
-  }
+    @Override
+    public BasicRover forecast(String instructions) {
+        BasicRover r = new BasicRover(this);
+        r.move(instructions);
+        return r;
+    }
 
-  @Override
-  public void moveBackward() {
-    Coordinate delta = move(REVERSE, this.direction);
-    this.coordinate = this.coordinate.add(delta.x(), delta.y());
-  }
+    @Override
+    public void moveForward() {
+        Coordinate delta = move(FORWARD, this.direction);
+        this.coordinate = this.coordinate.add(delta.x(), delta.y());
+    }
 
-  @Override
-  public void rotateRight() {
-    direction = direction.rotate();
-  }
+    @Override
+    public void moveBackward() {
+        Coordinate delta = move(REVERSE, this.direction);
+        this.coordinate = this.coordinate.add(delta.x(), delta.y());
+    }
 
-  @Override
-  public void rotateLeft() {
-    direction = direction.rotateAntiClockwise();
-  }
+    @Override
+    public void rotateRight() {
+        direction = direction.rotate();
+    }
 
-  public Direction getDirection() {
-    return direction;
-  }
+    @Override
+    public void rotateLeft() {
+        direction = direction.rotateAntiClockwise();
+    }
 
-  public Coordinate getCoordinate() {
-    return this.coordinate;
-  }
+    public Direction getDirection() {
+        return direction;
+    }
 
-  @Override
-  public String toString() {
-    return "BasicRover{direction=" + direction + ", Coordinate=" + coordinate.toString() + '}';
-  }
+    public Coordinate getCoordinate() {
+        return this.coordinate;
+    }
 
-  @Override
-  public Long id() {
-    return id;
-  }
+    @Override
+    public String toString() {
+        return "BasicRover{direction=" + direction + ", Coordinate=" + coordinate.toString() + '}';
+    }
+
+    @Override
+    public Long id() {
+        return id;
+    }
 }

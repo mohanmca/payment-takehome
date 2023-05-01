@@ -5,46 +5,57 @@
     <title>Mars planet</title></head>
 <body>
 <h1>Rover - workflow</h1>
-Crate a randome rover -
+Create few random rovers -
 <button id="create" onclick="createIt()">Create</button>
 <br/>
-Number of rovers - <input type="text" name="size"><br/>
+Number of rovers currently running - <input type="text" id="size"><br/>
 Move the rover-id - <input type="text" id="rover_id"><br/>
-instructions - <input type="text" id="instruction"><br/>
-Result of recent API - <input type="text" id="result"><br/>
+instructions - <input type="text" id="instruction"><br/><br/><br/>
+Recent javascript API output for debugging<br/>
+<textarea id="result" rows="4" cols="50"></textarea><br/>
 <button name="Move" onclick="moveIt()">Move</button>
 </body>
 <script defer>
     function findSize() {
-        const input = Array.from(document.getElementsByName("size"))[0]
+        const input = document.getElementById("size")
         fetch("/rover/size")
             .then((response) => response.text())
             .then((result) => { input.value = result;});
 
     }
 
+    function appendText(text) {
+        const existing = document.getElementById("result").value;
+        document.getElementById("result").value = text + existing;
+    }
+
     function createIt() {
-        const result = document.getElementById("result")
-        const x = Math.floor(Math.random() * 10);
-        const y = Math.floor(Math.random() * 10);
-        const create_request = `/rover/create?direction=E&x=${x}&y=${y}`;
-        console.log(create_request)
-        fetch(create_request)
-            .then((response) => response.text())
-            .then((value) => { result.value = value;});
+        var n = Math.floor(Math.random() * 10);
+        for (var input = 1; input <= n; input++) {
+            const x = Math.floor(Math.random() * 10);
+            const y = Math.floor(Math.random() * 10);
+            const create_request = `/rover/create?direction=E&x=${x}&y=${y}`;
+            console.log(create_request)
+            fetch(create_request)
+                .then((response) => response.text())
+                .then((result) => { appendText(result) });
+        }
+        findSize()
     }
 
     function moveIt() {
-        const input = document.getElementById("rover_id").value
-        const instructions = document.getElementById("instruction").value
-        const move_request = `/rover/navigate?id=${input}&commands=${instructions}`;
+        const rover_id = document.getElementById("rover_id").value;
+        const instructions = document.getElementById("instruction").value;
+        const move_request = `/rover/navigate?id=${rover_id}&commands=${instructions}`;
         console.log(move_request)
         fetch(move_request)
             .then((response) => response.text())
-            .then((result) => { input.value = result;});
+            .then((result) => { appendText(result) });
     }
 
     findSize();
+
+
 
 </script>
 

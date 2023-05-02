@@ -58,4 +58,8 @@ public class Plane {
     public Coordinate getBottomRight() {
         return bottomRight;
     }
+
+    public void clear() {
+        objects.clear();
+    }
 }

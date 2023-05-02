@@ -3,7 +3,6 @@ package com.mars;
 import com.mars.primitives.Rover;
 import com.mars.service.NavigableRoverFactory;
 import com.mars.service.RoverFactory;
-import com.mars.service.BasicRoverFactory;
 
 public class Main {
   public static void main(String[] args) {

@@ -5,6 +5,7 @@ import com.mars.primitives.Direction;
 import com.mars.primitives.Rover;
 import com.mars.service.RoverManager;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import java.util.Collections;
@@ -12,6 +13,11 @@ import java.util.Collections;
 class PlaneTest {
 
     Plane simplePlane = DefaultDummyConfigurations.DEFAULT_PLANE;
+
+    @BeforeEach
+    void clear() {
+        simplePlane.clear();
+    }
 
     @Test
     void isOccupied() {

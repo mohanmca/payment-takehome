@@ -9,7 +9,9 @@ Create few random rovers -
 <button id="create" onclick="createIt()">Create</button>
 <br/>
 Number of rovers currently running - <input type="text" id="size"><br/>
-Move the rover-id - <input type="text" id="rover_id"> <button name="Move" onclick="moveIt()">Move</button><br/>
+Move the rover-id - <input type="text" id="rover_id">
+<button name="Move" onclick="moveIt()">Move</button>
+<br/>
 instructions - <input type="text" id="instruction" value="F,B,R,L"><br/><br/><br/>
 Recent javascript API output for debugging<br/>
 API results are appended, pay attention the top line for recent api output<br/>
@@ -23,6 +25,17 @@ API results are appended, pay attention the top line for recent api output<br/>
             .then((response) => response.text())
             .then((result) => { input.value = result;});
 
+    }
+
+    function list() {
+          var xhttp = new XMLHttpRequest();
+          xhttp.onreadystatechange = function() {
+            if (this.readyState == 4 && this.status == 200) {
+              document.getElementById("result").value = this.responseText;
+            }
+          };
+          xhttp.open("GET", "/rover/list", true);
+          xhttp.send();
     }
 
     function appendText(text) {
@@ -55,6 +68,7 @@ API results are appended, pay attention the top line for recent api output<br/>
     }
 
     findSize();
+    list();
 
 
 

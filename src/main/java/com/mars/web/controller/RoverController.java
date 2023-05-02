@@ -6,6 +6,7 @@ import com.mars.service.RoverFactory;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
@@ -49,5 +50,10 @@ public class RoverController {
             registry.put(registry.size(), r);
         }
         return rovers;
+    }
+
+    @GetMapping("/rover/list")
+    Collection<Rover> listAll() {
+        return registry.values();
     }
 }

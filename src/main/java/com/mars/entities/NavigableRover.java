@@ -109,6 +109,10 @@ public class NavigableRover implements Rover, Identifiable {
         return this.rover.getCoordinate();
     }
 
+    public Long getId() {
+        return id();
+    }
+
     @Override
     public String toString() {
         return "NavigableRover{ id="

@@ -12,41 +12,42 @@ import java.util.TreeMap;
 
 @RestController
 public class RoverController {
-  private final RoverFactory factory;
-  private final Plane plane;
-  Map<Integer, Rover> registry = new TreeMap<Integer, Rover>();
+    private final RoverFactory factory;
+    private final Plane plane;
+    Map<Integer, Rover> registry = new TreeMap<Integer, Rover>();
 
-  public RoverController(RoverFactory factory, Plane plane) {
-    this.factory = factory;
-    this.plane = plane;
-  }
-
-  @GetMapping("/rover/create")
-  Rover newRover(Character direction, Integer x, Integer y) {
-    Integer id = registry.size();
-    registry.put(registry.size(), factory.createRover(direction, x, y));
-    return registry.get(id);
-  }
-
-  @GetMapping("/rover/size")
-  Integer size() {
-    return registry.size();
-  }
-
-  @GetMapping("/rover/navigate")
-  Rover navigate(Integer id, String commands) {
-    Rover r = registry.get(id);
-    r.move(commands);
-    return r;
-  }
-
-  @GetMapping("/rover/createN")
-  List<Rover> createNRovers(int n) {
-    List<Rover> rovers = factory.createNRovers(n, plane);
-    for (Rover r : rovers) {
-      Integer id = registry.size();
-      registry.put(registry.size(), r);
+    public RoverController(RoverFactory factory, Plane plane) {
+        this.factory = factory;
+        this.plane = plane;
     }
-    return rovers;
-  }
+
+    @GetMapping("/rover/create")
+    Rover newRover(Character direction, Integer x, Integer y) {
+        Integer id = registry.size();
+        Rover newRover = factory.createRover(direction, x, y);
+        registry.put(registry.size(), newRover);
+        return registry.get(id);
+    }
+
+    @GetMapping("/rover/size")
+    Integer size() {
+        return registry.size();
+    }
+
+    @GetMapping("/rover/navigate")
+    Rover navigate(Integer id, String commands) {
+        Rover r = registry.get(id);
+        r.move(commands);
+        return r;
+    }
+
+    @GetMapping("/rover/createN")
+    List<Rover> createNRovers(int n) {
+        List<Rover> rovers = factory.createNRovers(n, plane);
+        for (Rover r : rovers) {
+            Integer id = registry.size();
+            registry.put(registry.size(), r);
+        }
+        return rovers;
+    }
 }

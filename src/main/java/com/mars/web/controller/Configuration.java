@@ -2,6 +2,7 @@ package com.mars.web.controller;
 
 import com.mars.constants.DefaultDummyConfigurations;
 import com.mars.entities.Plane;
+import com.mars.service.NavigableRoverFactory;
 import com.mars.service.RandomRoverFactory;
 import com.mars.service.RoverFactory;
 import org.springframework.context.annotation.Bean;
@@ -10,7 +11,7 @@ import org.springframework.context.annotation.Bean;
 public class Configuration {
   @Bean
   public RoverFactory getFactory() {
-    return RandomRoverFactory.getInstance();
+    return NavigableRoverFactory.getInstance();
   }
 
   @Bean

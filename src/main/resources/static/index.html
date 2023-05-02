@@ -9,11 +9,12 @@ Create few random rovers -
 <button id="create" onclick="createIt()">Create</button>
 <br/>
 Number of rovers currently running - <input type="text" id="size"><br/>
-Move the rover-id - <input type="text" id="rover_id"><br/>
-instructions - <input type="text" id="instruction"><br/><br/><br/>
+Move the rover-id - <input type="text" id="rover_id"> <button name="Move" onclick="moveIt()">Move</button><br/>
+instructions - <input type="text" id="instruction" value="F,B,R,L"><br/><br/><br/>
 Recent javascript API output for debugging<br/>
+API results are appended, pay attention the top line for recent api output<br/>
 <textarea id="result" rows="4" cols="50"></textarea><br/>
-<button name="Move" onclick="moveIt()">Move</button>
+
 </body>
 <script defer>
     function findSize() {
@@ -26,7 +27,7 @@ Recent javascript API output for debugging<br/>
 
     function appendText(text) {
         const existing = document.getElementById("result").value;
-        document.getElementById("result").value = text + existing;
+        document.getElementById("result").value = text + "\n" + existing;
     }
 
     function createIt() {

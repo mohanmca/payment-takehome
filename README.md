@@ -9,6 +9,9 @@
 2. Ensure minikube is running on your machine
    1. ```minikube status```
    2. ```minikube dashboard```
+3. ./run.sh
+   1. Copying local impage into minikube takes at-least 3 minutes
+   2. Copy the service url and paste it in the browser
 
 
 

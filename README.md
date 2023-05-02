@@ -1,3 +1,17 @@
+## How to execute locally (without containers)
+
+1. Application was tested on Mac
+2. Goto to the root of the directory, and invoke ./execute.sh
+
+
+## How to execute within Minikube
+1. Application was tested on minikube v1.30.1 on Darwin 13.3.1 (arm64)
+2. Ensure minikube is running on your machine
+   1. ```minikube status```
+   2. ```minikube dashboard```
+
+
+
 ## CLI commands often used while development
 ```bash
 mvn spring-boot:run

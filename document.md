@@ -1,5 +1,5 @@
 ## How to test code
-1. Either use the url (with adjusted port) in as per readme.md
+1. Use the url in as per readme.md (with adjusted port)
    1. [Create 1st Rower](http://127.0.0.1:8080/rover/create?direction=E&x=3&y=5)
    2. [Create 2nd Rower](http://127.0.0.1:8080/rover/create?direction=E&x=3&y=5)
    3. [Navigate first rovers](http://127.0.0.1:8080/rover/navigate?id=1&commands=F,L,F,R,F)
